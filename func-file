@@ -1,0 +1,67 @@
+# SCRIPT LIBRARY
+# ------ -------
+
+SUCCESS=0
+FAILURE=-1
+E_NO_ARGS=64
+E_PARAM_ERR=128       # Param error.
+
+
+Param_Error ()        # Command-line parameters wrong.
+{
+  echo "Usage: `basename $0` arg1 operator arg2"
+  exit $E_PARAM_ERR
+}  
+
+Args_Error ()
+{
+  echo "Wrong sign for operation"
+  exit $E_PARAM_ERR
+}
+
+Addition ()
+{
+result=`echo $dilene + $dilnyk | bc`
+}
+
+
+Subtraction ()
+{
+result=`echo $dilene - $dilnyk | bc`
+}
+
+
+Multiplication ()
+{
+result=`echo $dilene * $dilnyk | bc`
+}
+
+
+Division ()
+{
+result=`echo $dilene / $dilnyk | bc`
+}
+
+
+small_calc ()
+{
+echo "enter first value:"
+read x
+echo "enter second value"
+read y
+echo "enter action symbol"
+read act
+
+case $act in
+"+") echo " $x + $y ="  $(expr $y + $x);;
+"-") echo "$x - $y ="   $(expr $x - $y);;
+"/") if [ $y -eq 0 ]; then
+       echo "error: delimiter by zero";
+     else
+       echo " $x / $y =" $(expr  $x / $y);
+     fi;;
+"*") echo " $x * $y =" $(expr  $x \* $y);;
+*) echo "command is unknown!"
+esac
+}
+
